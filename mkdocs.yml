@@ -1,0 +1,23 @@
+site_name: BackpackManager
+repo_name: BackpackManager
+repo_url: https://github.com/Nem999/BackpackManager
+theme:
+  name: material
+  features:
+  - navigation.sections
+  - toc.integrate
+  - navigation.top
+  - search.suggest
+  - search.highlight
+  - content.tabs.link
+  - content.code.annotation
+  language: en
+  palette:
+    primary: "Deep Purple"
+    accent: "Deep Purple"
+
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
