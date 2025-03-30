@@ -39,3 +39,5 @@ local BackpackManager = require(BackpackManager)
 
 BackpackManager.StartBackpack()
 ```
+
+You can find the documentation [here](https://nem999.github.io/BackpackManager/home/).
