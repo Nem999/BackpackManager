@@ -27,15 +27,4 @@ Key Features include:
 2. Download the most recent rbxm.
 3. Open studio into your place.
 4. Right click the StarterGui and click on "Insert from File"
-
-
-[NOTE] Once you you have BackpackManager installed you can move the module where you'd like it's recommended to place it in [ReplicatedStorage](https://create.roblox.com/docs/reference/engine/classes/ReplicatedStorage).
-
-
-Create a LocalScript in StarterPlayerScripts with the following:
-
-```luau
-local BackpackManager = require(BackpackManager)
-
-BackpackManager.StartBackpack()
 ```
