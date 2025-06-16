@@ -27,4 +27,3 @@ Key Features include:
 2. Download the most recent rbxm.
 3. Open studio into your place.
 4. Right click the StarterGui and click on "Insert from File"
-```
