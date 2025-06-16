@@ -18,12 +18,3 @@ Key Features include:
 2. Open studio into your place
 3. Open the toollbox and go to "My models"
 4. Drag the Module into your game (It should be a ScreenGui named "BackpackGui")
-
-
-Create a LocalScript in StarterPlayerScripts with the following:
-
-```luau
-local BackpackManager = require(BackpackManager)
-
-BackpackManager.StartBackpack()
-```

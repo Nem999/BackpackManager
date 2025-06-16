@@ -1,3 +1,5 @@
+-- Special thanks to Spynaz
+
 local UDim2_new = UDim2.new
 
 local UserInputService = game:GetService("UserInputService")
@@ -8,6 +10,7 @@ local Spring = require(script.Parent:WaitForChild("Spring"))
 local DraggableObject 		= {}
 DraggableObject.__index 	= DraggableObject
 local DraggingObj = nil
+local waiting = false
 local StartTime
 
 
@@ -22,6 +25,7 @@ function DraggableObject.new(Object, MainGui, MoveCodes, BP, fn)
 	self.DragEnded		= nil
 	self.Dragged		= nil
 	self.Dragging		= false
+	self.DragEnabled	= false
 	self.MainGui 		= MainGui
 	self.FastMoveCodes 	= MoveCodes
 	self.BP = BP
@@ -41,18 +45,31 @@ function DraggableObject:Enable()
 	local preparingToDrag	= false
 	local isDragging = false
 	local Data = self.Data
+	
+	self.DragEnabled = true
 
 	local GhostObject
+	
+	if self.InputBegan then
+		
+	end
+	
+	if self.InputChanged then
+		
+	end
 
 	local function update(input)
 		local mouselocation = UserInputService:GetMouseLocation()
 
 		local newPosition	= UDim2_new(0, mouselocation.X + GuiService:GetGuiInset().X - (object.AbsoluteSize.X / 2), 0, mouselocation.Y + (object.AbsoluteSize.Y / 2) - GuiService:GetGuiInset().Y)
+		
+		if GhostObject then
+			Spring.target(GhostObject, 1.1, 8, {
+				Position = newPosition
+			})
 
-		Spring.target(GhostObject, 1.1, 8, {
-			Position = newPosition
-		})
-
+		end
+		
 		-- GhostObject.Position = newPosition
 
 		return newPosition
@@ -71,7 +88,7 @@ function DraggableObject:Enable()
 			if not self.BP:IsInventoryOpen() then return end
 		end
 
-		if not object.Parent.Tool.Value then return end
+		if not object.Parent.Tool.Value then self:Disable(true) return end
 
 		if ignore or MouseOrTouchMovement(input) and preparingToDrag then
 			if DraggingObj then return end
@@ -92,6 +109,7 @@ function DraggableObject:Enable()
 					Stroke.Transparency = 1
 
 					Stroke.Parent = object
+					waiting = true
 
 					while workspace:GetServerTimeNow() < NeededTime do
 						if not isDragging then
@@ -115,6 +133,7 @@ function DraggableObject:Enable()
 						Stroke.Transparency = 1 + math.abs(1 - (workspace:GetServerTimeNow() - LoggedStartTime) / ((LoggedStartTime + self.BP.Settings.DragWaitTime) - LoggedStartTime))
 						task.wait()
 					end
+					
 
 					Stroke:Destroy()
 
@@ -130,6 +149,8 @@ function DraggableObject:Enable()
 						return
 					end
 				end
+				
+				waiting = false
 
 				if GhostObject then GhostObject:Destroy() self.GhostObject = nil end
 				
@@ -209,27 +230,33 @@ function DraggableObject:Enable()
 				doDragging(false, nil, true)
 			end
 
-			local connection 
-			connection = input.Changed:Connect(function()
+			
+			self.connection = input.Changed:Connect(function()
 				if input.UserInputState == Enum.UserInputState.End and (self.Dragging or preparingToDrag or isDragging) then
 					self.Dragging = false
-					connection:Disconnect()
+					self.connection:Disconnect()
 
 					local previous = DraggingObj
 
 					DraggingObj = nil
 
 					if self.DragEnded and not preparingToDrag and GhostObject then
+						
+						local MouseLocation = UserInputService:GetMouseLocation()
 
-						local GhostPosition = UDim2.fromOffset(GhostObject.AbsolutePosition.X  + (GhostObject.AbsoluteSize.X / 2), (GhostObject.AbsolutePosition.Y + (GhostObject.AbsoluteSize.Y / 2)))
+						local GhostPosition = UDim2.fromOffset(MouseLocation.X + GuiService:GetGuiInset().X, MouseLocation.Y - GuiService:GetGuiInset().Y) -- doing this because of possible animations
 
 						if GhostObject then GhostObject:Destroy() self.GhostObject = nil end
 
 						if previous then
 							self.BP.DragEnded:Fire(Data.Tool, Data.Frame, GhostObject, false, GhostPosition)
 						end
-
-						self.DragEnded(GhostPosition)
+						
+						if not waiting then
+							self.DragEnded(GhostPosition)
+						end
+						
+						waiting = false
 					end
 
 					isDragging = false
@@ -250,10 +277,16 @@ function DraggableObject:Enable()
 	end)
 end
 
-function DraggableObject:Disable()
+function DraggableObject:Disable(ignoreDragEnded)
 	self.InputBegan:Disconnect()
 	self.InputChanged:Disconnect()
 	self.InputChanged2:Disconnect()
+	
+	if self.connection then
+		self.connection:Disconnect()
+	end
+	
+	self.DragEnabled = true
 
 	local Previous = DraggingObj
 
@@ -262,7 +295,9 @@ function DraggableObject:Disable()
 	local GhostPosition
 
 	if self.GhostObject then
-		GhostPosition =  UDim2.fromOffset(self.GhostObject.AbsolutePosition.X  + (self.GhostObject.AbsoluteSize.X / 2), (self.GhostObject.AbsolutePosition.Y + (self.GhostObject.AbsoluteSize.Y / 2)))
+		local MouseLocation = UserInputService:GetMouseLocation()
+
+		GhostPosition = UDim2.fromOffset(MouseLocation.X + GuiService:GetGuiInset().X, MouseLocation.Y - GuiService:GetGuiInset().Y)
 		self.GhostObject:Destroy()
 
 		self.GhostObject = nil
@@ -276,7 +311,7 @@ function DraggableObject:Disable()
 		end
 
 		if self.DragEnded then
-			self.DragEnded(GhostPosition)
+			self.DragEnded(GhostPosition, ignoreDragEnded)
 		end
 	end
 end

@@ -12,7 +12,7 @@ Settings.DragWaitTime = 0.15 -- How long the player has to hold a tool before it
 Settings.ToolTipSpeed = 0.035 -- How fast tool tip typewriter effect is. Change to 0 to disable.
 
 
-Settings.AutoCalculateMaxToolSlots = true -- If set to true the backpack script will automatically calculate how many tools can fit at once.
+Settings.AutoCalculateMaxToolSlots = true -- If set to true BackpackManager will automatically calculate how many tools can fit at once.
 Settings.UseViewportFrame = false -- If set to true then a viewport frame will display tools instead.
 Settings.USE_SCROLLWHEEL = false -- If set to true then scrolling with your mouse will cycle through tools.
 Settings.CanOrganize = true -- If set to true then the player will be able to organize tools in their backpack, such as swapping and or moving tools.
@@ -21,7 +21,8 @@ Settings.AutoSortSlots = false -- If set to true backpack will automatically cal
 Settings.PreventEquippingOnToolCooldown = false -- If set to true when a tool is on cooldown it will not be able to be equipped.
 Settings.UseGamepadCursor = true -- If set to true then a gamepad cursor will be enabled.
 Settings.ShowHints = true -- Will show input hints if enabled and will not if disabled.
-
+Settings.ShowBackpackIcon = true -- Will show backpack icon if enabled and will not if disabled. NOTE: Mobile users will not have a way of opening the inventory if this is disabled unless you implement your own button.
+Settings.ShowInactiveHotbarSlots = false -- Empty hotbar slots will show if set to true and will not show if set to false.
 
 
 Settings.BackpackButtonOpenedColor = Color3.fromRGB(141, 164, 238) -- Color of the backpack button when the inventory is opened
@@ -120,7 +121,9 @@ local function validateSettings()
 
 	checkType("PreventEquippingOnToolCooldown", "boolean")
 	checkType("AutoCalculateMaxToolSlots", "boolean")
+	checkType("ShowInactiveHotbarSlots", "boolean")
 	checkType("UseGamepadCursor", "boolean")
+	checkType("ShowBackpackIcon", "boolean")
 	checkType("UseViewportFrame", "boolean")
 	checkType("USE_SCROLLWHEEL", "boolean")
 	checkType("AutoSortSlots", "boolean")
@@ -180,7 +183,7 @@ if game:GetService("VRService").VREnabled then -- Manually adding VR buttons her
 		end
 	end
 	
-	table.insert(Settings.INVENTORY_OPENANDCLOSE_KEYCODES, Enum.KeyCode.ButtonX)
+	table.insert(Settings.INVENTORY_OPENANDCLOSE_KEYCODES, Enum.KeyCode.ButtonX) -- Mapping Button X for inventory on VR devices
 end
 
 validateSettings()
