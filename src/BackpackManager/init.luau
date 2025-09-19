@@ -1493,6 +1493,8 @@ function MoveEquipBar(FrameSlot, DisabledFrame, time)
 
 		if FrameSlot.PlacementSlot or InventoryIsOpen then
 			SetBarTransparency(NewUISection, 0)
+		else
+			SetBarTransparency(NewUISection, 1, 0)
 		end
 
 		if FrameSlot.PlacementSlot then
@@ -1526,6 +1528,8 @@ function MoveEquipBar(FrameSlot, DisabledFrame, time)
 				end
 
 				local function move()
+					if not Highlight or not Highlight.Highlight or not Highlight.Highlight:FindFirstChild("Border") then FrameSlot.Moving = false return end
+					
 					if Highlight.Highlight.Border.ImageLabel.ImageTransparency ~= 1 then
 
 						if Backpack.Settings.Animate == true then
@@ -3158,7 +3162,7 @@ end
 ]]
 function Backpack:MoveToolToHotbarSlotNumber(Tool, SlotNumber: number, fromPosition):table
 	isModuleRunning()
-	if typeof(SlotNumber) ~= "number" then error("Argument 1 is not of type: number") end
+	if typeof(SlotNumber) ~= "number" then error("Argument 2 is not of type: number") end
 	if SlotNumber % 1 ~= 0 then error("Slot Number must be a integer (whole number)") end
 	if SlotNumber < 1 then error("Slot number cannot be less than 1") end
 	if SlotNumber > Backpack.Settings.MaxHotbarToolSlots then warn("Not moving tool because number is bigger than tool max. (Tool would become lost.)") return end
@@ -4021,7 +4025,6 @@ function Backpack:SortTools()
 				ToolSlot.Locked = Slot.Locked
 
 				deleteToolSlotData(Slot)
-
 				refreshSlot(ToolSlot, true)
 				break
 			end
@@ -4522,9 +4525,8 @@ function Backpack:SetCooldown(Tool, Seconds: number)
 
 	if not Tool then warn("Tool does not exist within backpack") return end 
 
-	if typeof(Seconds) ~= "number" then error("Argument 3 is not of type: number") end
+	if typeof(Seconds) ~= "number" then error("Argument 2 is not of type: number") end
 
-	local TempConnection
 	local Slot = Backpack:GetSlotFromTool(Tool)
 	local StartingServerTime = workspace:GetServerTimeNow()
 
