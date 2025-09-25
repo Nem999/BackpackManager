@@ -47,6 +47,8 @@ local LocalPlayer: Player = PlayersService.LocalPlayer or PlayersService:GetProp
 local ScreenGui = LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("BackpackGui")
 local BackpackGui = ScreenGui.BackpackGui
 
+local PlaceholderText = "Search"
+
 local MaxGluedSlots = 3
 local InvAnimation = 1
 
@@ -332,7 +334,7 @@ function AtLeastOneBasePart(ToolSlot)
 			end
 		end
 	end
-	
+
 	return false
 end
 
@@ -493,6 +495,7 @@ function MouseEnter(ToolSlot, ...)
 		Backpack.HoverStarted:Fire(ToolSlot.Frame, ...)
 	end
 
+	if not ToolSlot then return end
 	if not ToolSlot.Tool then return end
 end
 
@@ -602,8 +605,10 @@ function DisplayHints(shouldNotSetHints)
 	BPButton.HintIcon.Image = findHintButton(Backpack.Settings.INVENTORY_OPENANDCLOSE_KEYCODES)
 
 
+
 	local function applyHints(Tool, isUiSelectMode)
 		if #UISelectedSlots < 1 and Tool then -- No slots selected but we're hovering over a tool
+
 
 			if isUiSelectMode or UserInputService:GetLastInputType().Name:match("Gamepad") then
 
@@ -738,7 +743,7 @@ function onParentUpdate(Tool, Parent, ForceRemove)
 		if EquippedTools[Tool] then
 			EquippedTools[Tool] = nil
 		end
-		
+
 		MoveEquipBar(false)
 
 		if ToolSlot.PlacementSlot then
@@ -787,9 +792,9 @@ function onParentUpdate(Tool, Parent, ForceRemove)
 				delay(.28, function()
 					if not ToolSlot then return end
 					if not ToolSlot.Frame then return end
-					
+
 					if not ToolSlot.Frame:FindFirstChild("Tool") then return end
-					
+
 					if not ToolSlot.Frame.Tool.Value and InventoryIsOpen then
 						ToolSlot.Frame.Visible = false
 					end
@@ -835,14 +840,14 @@ function onParentUpdate(Tool, Parent, ForceRemove)
 	if Parent == Character then
 		local HBarSlot = Backpack:GetSlotFromTool(Tool)
 		local didExist = (if EquippedTools[Tool] then true else false)
-		
+
 		EquippedTools[Tool] = HBarSlot
-		
+
 		local Highlight = MoveEquipBar(HBarSlot)
 		if not didExist then
 			Backpack.ToolEquipped:Fire(Tool, HBarSlot.Frame, Highlight)
 		end
-		
+
 	end
 end
 
@@ -1188,11 +1193,11 @@ function newSlot(Tool: Tool, BPSlot, SlotNum)
 			end
 
 			iconUpdate(ToolSlot)
-			
+
 			local atleastonebasepart = AtLeastOneBasePart(ToolSlot)
-			
+
 			if ToolSlot.ViewportEnabled then
-		--		ToolSlot.Frame.Button.ViewportFrame.Visible = true
+				--		ToolSlot.Frame.Button.ViewportFrame.Visible = true
 			end
 
 			local exitingearly = false
@@ -1493,6 +1498,8 @@ function MoveEquipBar(FrameSlot, DisabledFrame, time)
 
 		if FrameSlot.PlacementSlot or InventoryIsOpen then
 			SetBarTransparency(NewUISection, 0)
+		else
+			SetBarTransparency(NewUISection, 1, 0)
 		end
 
 		if FrameSlot.PlacementSlot then
@@ -1513,9 +1520,7 @@ function MoveEquipBar(FrameSlot, DisabledFrame, time)
 					Highlight.Highlight.Parent = BackpackGui.BackpackMain
 				end
 
-				if Highlight.Highlight.Parent == BackpackGui.BackpackMain then
-					Highlight.Highlight.Visible = true
-				end
+				Highlight.Highlight.Visible = true
 
 				HighlightedTools[i].FrameSlot = FrameSlot
 				HighlightedTools[i].Frame = FrameSlot.Frame
@@ -1526,6 +1531,8 @@ function MoveEquipBar(FrameSlot, DisabledFrame, time)
 				end
 
 				local function move()
+					if not Highlight or not Highlight.Highlight or not Highlight.Highlight:FindFirstChild("Border") then FrameSlot.Moving = false return end
+
 					if Highlight.Highlight.Border.ImageLabel.ImageTransparency ~= 1 then
 
 						if Backpack.Settings.Animate == true then
@@ -1603,6 +1610,7 @@ function BuildGui()
 
 	BackgroundTransparency = BPButton.ImageButton.BackgroundColor3
 	InventoryFrame:SetAttribute("Size", InventoryFrame.Size)
+	InventoryFrame.TextBox.PlaceholderText = PlaceholderText
 
 	local function findAndSetAttributes(object: GuiObject)
 		if ClassTypes[object.ClassName] then
@@ -2180,7 +2188,7 @@ function refreshSlot(Slot, PrevSlot, ignoreSlotPosition)
 
 	if not Slot.ViewportEnabled or not atleastonebasepart then
 		Slot.Frame.Button.ViewportFrame.Visible = false
-		
+
 		if Slot.Tool.TextureId ~= "" then
 			Slot.Frame.Button.ToolImage.Visible = true
 			Slot.Frame.Button.ToolName.Visible = false
@@ -3158,7 +3166,7 @@ end
 ]]
 function Backpack:MoveToolToHotbarSlotNumber(Tool, SlotNumber: number, fromPosition):table
 	isModuleRunning()
-	if typeof(SlotNumber) ~= "number" then error("Argument 1 is not of type: number") end
+	if typeof(SlotNumber) ~= "number" then error("Argument 2 is not of type: number") end
 	if SlotNumber % 1 ~= 0 then error("Slot Number must be a integer (whole number)") end
 	if SlotNumber < 1 then error("Slot number cannot be less than 1") end
 	if SlotNumber > Backpack.Settings.MaxHotbarToolSlots then warn("Not moving tool because number is bigger than tool max. (Tool would become lost.)") return end
@@ -3434,7 +3442,7 @@ function Backpack:MoveToolToInventory(Tool: Tool, fromPosition: UDim2):table
 				if TargetSlot and TargetSlot.Tool == Tool and (Tool.Parent == Character or Tool.Parent == BackpackInstance) then
 					if not TargetSlot.Frame then return end
 					if not TargetSlot.Frame:FindFirstChild("Button") then return end
-					
+
 					TargetSlot.Frame.Button.Visible = true
 				end
 
@@ -3544,7 +3552,7 @@ function Backpack:MoveToolToHotbar(Tool : Tool, fromPosition : UDim2):table
 			delay(.1, function()
 				if not Backpack.Settings.ShowInactiveHotbarSlots then
 					if not TargetSlot or not TargetSlot.Frame then return end
-					
+
 					TargetSlot.Frame.Visible = false
 				end
 			end)
@@ -3642,7 +3650,7 @@ function Backpack:MoveToolToHotbar(Tool : Tool, fromPosition : UDim2):table
 				if ToolTemp == TargetSlot.Tool then
 					if not TargetSlot.Frame then return end
 					if not TargetSlot.Frame:FindFirstChild("Button") then return end
-					
+
 					TargetSlot.Frame.Button.Visible = true
 				end
 
@@ -3824,13 +3832,13 @@ function Backpack:SwapTools(Tool1, Tool2):(table | table)
 				if not Slot1 or not Slot2 then Exiting = true end
 				if not Slot1.Frame or not Slot2.Frame then Exiting = true end
 				if not Slot1.Frame:FindFirstChild("Button") or not Slot2.Frame:FindFirstChild("Button") then Exiting = true end
-				
+
 				if Exiting then
 					GhostSlot1.Visible = false
 					GhostSlot2.Visible = false
 					return
 				end
-				
+
 
 				Slot1.Frame.Button.Visible = true
 				Slot2.Frame.Button.Visible = true 
@@ -4021,7 +4029,6 @@ function Backpack:SortTools()
 				ToolSlot.Locked = Slot.Locked
 
 				deleteToolSlotData(Slot)
-
 				refreshSlot(ToolSlot, true)
 				break
 			end
@@ -4522,9 +4529,8 @@ function Backpack:SetCooldown(Tool, Seconds: number)
 
 	if not Tool then warn("Tool does not exist within backpack") return end 
 
-	if typeof(Seconds) ~= "number" then error("Argument 3 is not of type: number") end
+	if typeof(Seconds) ~= "number" then error("Argument 2 is not of type: number") end
 
-	local TempConnection
 	local Slot = Backpack:GetSlotFromTool(Tool)
 	local StartingServerTime = workspace:GetServerTimeNow()
 
@@ -4661,6 +4667,15 @@ function Backpack:IsSlotEquipable(ToolOrSlot):boolean
 end
 
 --[[
+	Sets the search placeholder text. (Only works before module has been started.)
+]]
+function Backpack:SetSearchPlaceholderText(Text: string)
+	if typeof(Text) ~= "string" then error("Argument 1 is not of type: string") end
+
+	PlaceholderText = Text
+end
+
+--[[
 	Starts the backpack, builds the gui, disables Roblox's default backpack, and only runs once.
 ]]
 function Backpack.StartBackpack()
@@ -4763,6 +4778,7 @@ function Backpack.StartBackpack()
 			local frame:Frame = create("Frame", {
 				Position = UDim2.fromOffset(MouseLocation.X + GuiService:GetGuiInset().X, MouseLocation.Y),
 				Size = UDim2.fromOffset(10, 10),
+				Visible = true,
 				Parent = BackpackGui.BackpackMain
 			})
 
@@ -4991,13 +5007,17 @@ function Backpack.StartBackpack()
 		if InputObject.KeyCode == Enum.KeyCode.Thumbstick1 and (math.abs(InputObject.Position.X) > 0.2 or math.abs(InputObject.Position.Y) > 0.2) then wasCursorPositionManuallyUpdated = false
 			local MouseLocation = UserInputService:GetMouseLocation()
 
+			local Inset = GuiService:GetGuiInset()
+
+			local NewPosition = UDim2.fromOffset(MouseLocation.X, MouseLocation.Y)
 
 			local frame:Frame = create("Frame", {
-				Position = UDim2.fromOffset(MouseLocation.X, MouseLocation.Y),
+				Position = UDim2.fromOffset(NewPosition.X.Offset,NewPosition.Y.Offset),
 				Size = UDim2.fromOffset(10, 10),
-				Visible = true,
 				Parent = BackpackGui.BackpackMain
-			}) -- As of right now mobile is going to have a weird offset because I cannot get the device's safe inset offset
+			})
+
+			-- heads up! gamepad cursors on mobile devices that have notches are going to be offsetted incorrectly. this is likely a bug with the roblox engine if anybody knows any work around let me know ASAP!
 
 			local GuiObjects = LocalPlayer.PlayerGui:GetGuiObjectsAtPosition(frame.AbsolutePosition.X, frame.AbsolutePosition.Y)
 

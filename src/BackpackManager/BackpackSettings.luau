@@ -14,7 +14,7 @@ Settings.ToolTipSpeed = 0.035 -- How fast tool tip typewriter effect is. Change 
 
 Settings.AutoCalculateMaxToolSlots = true -- If set to true BackpackManager will automatically calculate how many tools can fit at once.
 Settings.UseViewportFrame = false -- If set to true then a viewport frame will display tools instead.
-Settings.USE_SCROLLWHEEL = false -- If set to true then scrolling with your mouse will cycle through tools.
+Settings.UseScrollWheel = false -- If set to true then scrolling with your mouse will cycle through tools.
 Settings.CanOrganize = true -- If set to true then the player will be able to organize tools in their backpack, such as swapping and or moving tools.
 Settings.Animate = true	 -- If set to true then tools will be more animated if set to false then tools will not be animated.
 Settings.AutoSortSlots = false -- If set to true backpack will automatically call Backpack:SortTools() when a tool is removed.
@@ -125,7 +125,7 @@ local function validateSettings()
 	checkType("UseGamepadCursor", "boolean")
 	checkType("ShowBackpackIcon", "boolean")
 	checkType("UseViewportFrame", "boolean")
-	checkType("USE_SCROLLWHEEL", "boolean")
+	checkType("UseScrollWheel", "boolean")
 	checkType("AutoSortSlots", "boolean")
 	checkType("CanOrganize", "boolean")
 	checkType("ShowHints", "boolean")
