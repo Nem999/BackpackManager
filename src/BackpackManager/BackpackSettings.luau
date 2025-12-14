@@ -6,10 +6,11 @@ Settings.NeededFreeSpace = 480 -- How much horizontal space in pixels is reserve
 Settings.MinHotbarSlots = 3 -- The minimum amount of hotbar slots allowed to be displayed. Change to higher number if you are willing to give up more space.
 Settings.EquipCooldown = 0.1 -- How long the player has to wait in between equipping tools.
 Settings.ViewportSpeed = 5 -- How fast tools spin in the viewport.
-Settings.SweepInterval = 120 -- How long it takes for the backpack script to clear unused inventory slots from memory.
+Settings.SweepInterval = 20 -- How long it takes BackpackManager to call :Destroy() on unused inventory slots.
 Settings.MaxHeldTools = 1 -- How many tools can be held at any given time.
 Settings.DragWaitTime = 0.15 -- How long the player has to hold a tool before it starts a drag. Change to 0 to disable.
 Settings.ToolTipSpeed = 0.035 -- How fast tool tip typewriter effect is. Change to 0 to disable.
+Settings.IconScale = 1 -- Scale for tool frame icons. Changing to 2 will double the size, you'll also most likely have to change some the offsets below if you're going to change this.
 
 
 Settings.AutoCalculateMaxToolSlots = true -- If set to true BackpackManager will automatically calculate how many tools can fit at once.
@@ -19,10 +20,12 @@ Settings.CanOrganize = true -- If set to true then the player will be able to or
 Settings.Animate = true	 -- If set to true then tools will be more animated if set to false then tools will not be animated.
 Settings.AutoSortSlots = false -- If set to true backpack will automatically call Backpack:SortTools() when a tool is removed.
 Settings.PreventEquippingOnToolCooldown = false -- If set to true when a tool is on cooldown it will not be able to be equipped.
-Settings.UseGamepadCursor = true -- If set to true then a gamepad cursor will be enabled.
+Settings.UseGamepadCursor = true -- If set to true then a gamepad cursor will show when the inventory gets opened.
 Settings.ShowHints = true -- Will show input hints if enabled and will not if disabled.
 Settings.ShowBackpackIcon = true -- Will show backpack icon if enabled and will not if disabled. NOTE: Mobile users will not have a way of opening the inventory if this is disabled unless you implement your own button.
 Settings.ShowInactiveHotbarSlots = false -- Empty hotbar slots will show if set to true and will not show if set to false.
+Settings.ShowToolNumber = true -- If true then tool numbers will show for hotbar slots.
+Settings.ToolEquippingDisabled = false -- If true then tools will not be able to be equipped. This also means that functions like BackpackManager:Equip(Tool) will not work, only manually parenting tools to your character will work.
 
 
 Settings.BackpackButtonOpenedColor = Color3.fromRGB(141, 164, 238) -- Color of the backpack button when the inventory is opened
@@ -101,7 +104,7 @@ end
 
 local function validateSettings()
 	-- Type checks
-
+	
 	checkType("MaxHotbarToolSlots", "number")
 	checkType("MinHotbarSlots", "number")
 	checkType("SweepInterval", "number")
@@ -109,6 +112,7 @@ local function validateSettings()
 	checkType("ViewportSpeed", "number")
 	checkType("MaxHeldTools", "number")
 	checkType("DragWaitTime", "number")
+	checkType("IconScale", "number")
 	checkType("InventoryYOffset", "number")
 	checkType("HotbarYOffset", "number")
 	checkType("GlueContainerXOffset", "number")
@@ -122,10 +126,12 @@ local function validateSettings()
 	checkType("PreventEquippingOnToolCooldown", "boolean")
 	checkType("AutoCalculateMaxToolSlots", "boolean")
 	checkType("ShowInactiveHotbarSlots", "boolean")
+	checkType("ToolEquippingDisabled", "boolean")
 	checkType("UseGamepadCursor", "boolean")
 	checkType("ShowBackpackIcon", "boolean")
 	checkType("UseViewportFrame", "boolean")
 	checkType("UseScrollWheel", "boolean")
+	checkType("ShowToolNumber", "boolean")
 	checkType("AutoSortSlots", "boolean")
 	checkType("CanOrganize", "boolean")
 	checkType("ShowHints", "boolean")
@@ -168,6 +174,12 @@ local function validateSettings()
 
 		if Settings.MaxHotbarToolSlots > 10 then
 			insertError("Max hotbar slots cannot be more than 10")
+		end
+	end
+	
+	if typeof(Settings.IconScale) == "number" then
+		if Settings.IconScale < 0 then
+			insertError("Icon scale cannot be less than 0")
 		end
 	end
 
