@@ -49,16 +49,9 @@ function DraggableObject:Enable()
 	self.DragEnabled = true
 
 	local GhostObject
-
-	if self.InputBegan then
-
-	end
-
-	if self.InputChanged then
-
-	end
-
+	
 	local function update(input)
+		
 		local mouselocation = UserInputService:GetMouseLocation()
 
 		local Inset:UDim2 = UDim2.fromOffset(object.AbsoluteSize.Y, object.AbsoluteSize.X)
@@ -84,10 +77,6 @@ function DraggableObject:Enable()
 		if not self.BP.Settings.CanOrganize then return end
 
 		if object.Parent.Parent == self.MainGui.Inventory.InventoryMain.Background.ScrollingFrame and not isDragging then
-			if not self.BP:IsInventoryOpen() then return end
-		end
-
-		if UserInputService.TouchEnabled then
 			if not self.BP:IsInventoryOpen() then return end
 		end
 
@@ -212,6 +201,10 @@ function DraggableObject:Enable()
 			end
 		end
 	end
+	
+	if self.InputBegan then self.InputBegan:Disconnect() end
+	if self.InputChanged then self.InputChanged:Disconnect() end
+	if self.InputChanged2 then self.InputChanged2:Disconnect() end
 
 	self.InputBegan = object.InputBegan:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch and input.UserInputState == Enum.UserInputState.Begin then
@@ -274,12 +267,14 @@ function DraggableObject:Enable()
 	end)
 
 	self.InputChanged = object.InputChanged:Connect(function(input)
+		
 		if MouseOrTouchMovement(input) then
 			dragInput = input
 		end
 	end)
 
 	self.InputChanged2 = UserInputService.InputChanged:Connect(function(input)
+		
 		doDragging(input)
 	end)
 end
