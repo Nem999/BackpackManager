@@ -34,7 +34,7 @@ local Backpack = {}
 --[[ SETTINGS ]]--
 Backpack.Settings = require(script:WaitForChild("BackpackSettings"))
 
-if RunService:IsServer() then error("Cannot require on the server.") end
+if RunService:IsServer() then error("[BackpackManager]: BackpackManager cannot be required on the server.", 0) end
 
 --*/ Don't touch */--
 local SlotChangedSignal = Signal.new()
@@ -46,8 +46,6 @@ local MaxSlotsInternal = Backpack.Settings.MaxHotbarToolSlots
 local LocalPlayer: Player = PlayersService.LocalPlayer or PlayersService:GetPropertyChangedSignal("LocalPlayer"):Wait() or PlayersService.LocalPlayer -- Incase the localplayer isnt already here
 local ScreenGui = LocalPlayer:WaitForChild("PlayerGui"):WaitForChild("BackpackGui")
 local BackpackGui = ScreenGui.BackpackGui
-
-local PlaceholderText = "Search"
 
 local MaxGluedSlots = 3
 local InvAnimation = 1
@@ -221,7 +219,7 @@ local function waitForChildOfClass(ClassName, inst : Instance)
 end
 
 function SetBackpack(BackpackInst : Backpack)
-	if typeof(BackpackInst) ~= "Instance" or not BackpackInst:IsA("Backpack") or BackpackInst.Parent ~= LocalPlayer then error("Invalid backpack please don't parent instances named 'Backpack' that aren't actually backpacks to the LocalPlayer.'") end -- This error shouldn't trigger anyway.
+	if typeof(BackpackInst) ~= "Instance" or not BackpackInst:IsA("Backpack") or BackpackInst.Parent ~= LocalPlayer then return end
 	if BackpackInstance then resetBackpack() end
 	if BPConnection then BPConnection:Disconnect() end
 
@@ -1546,14 +1544,16 @@ function MoveEquipBar(FrameSlot, DisabledFrame, time)
 						Highlight.Highlight.Position = UDim2.fromOffset(FrameSlot.Frame.AbsolutePosition.X + GuiService:GetGuiInset().X, FrameSlot.Frame.AbsolutePosition.Y + GuiService:GetGuiInset().Y)
 					end
 				end
+				
+				spawn(function()
+					while FrameSlot.Moving do
+						move()
 
-				while FrameSlot.Moving do
+						wait()
+					end
+
 					move()
-
-					wait()
-				end
-
-				move()
+				end)
 
 				return Highlight.Highlight
 			else
@@ -1607,10 +1607,16 @@ function BuildGui()
 	ToolTipFrame.Visible = false
 	InventoryFrame.Visible = false
 	HintFrame.Visible = false
+	
+	local Scale = Backpack.Settings.IconScale
+	
+	BackpackSlotFrame.Size = UDim2.fromOffset(BackpackSlotFrame.AbsoluteSize.X * Scale, BackpackSlotFrame.AbsoluteSize.Y * Scale)
+	SelectionUIFrame.Size = UDim2.fromOffset(SelectionUIFrame.AbsoluteSize.X * Scale, SelectionUIFrame.AbsoluteSize.Y * Scale)
+	
+	BackpackSlotFrame.Button.ToolNum.Visible = Backpack.Settings.ShowToolNumber
 
 	BackgroundTransparency = BPButton.ImageButton.BackgroundColor3
 	InventoryFrame:SetAttribute("Size", InventoryFrame.Size)
-	InventoryFrame.TextBox.PlaceholderText = PlaceholderText
 
 	local function findAndSetAttributes(object: GuiObject)
 		if ClassTypes[object.ClassName] then
@@ -2677,8 +2683,10 @@ function revealSlots(State)
 				local using = use or i
 
 				Slot.Frame.Button.ToolNum.Text = using
-
-				Slot.Frame.Button.ToolNum.Visible = true
+				
+				if Backpack.Settings.ShowToolNumber then
+					Slot.Frame.Button.ToolNum.Visible = true
+				end
 			end
 
 			spawn(function()
@@ -2733,8 +2741,10 @@ function revealSlots(State)
 				local using = use or i
 
 				Slot.Frame.Button.ToolNum.Text = using
-
-				Slot.Frame.Button.ToolNum.Visible = true
+				
+				if Backpack.Settings.ShowToolNumber then
+					Slot.Frame.Button.ToolNum.Visible = true
+				end
 			end
 		end
 	end
@@ -2779,6 +2789,7 @@ function Backpack:Equip(ToolOrSlot, Generic : boolean, RespectsCooldown: boolean
 	if RespectsCooldown == true then
 		if doesHaveEquipCooldown then return end
 	end
+	if Backpack.Settings.ToolEquippingDisabled then return end
 	if Locked then return end
 
 	doesHaveEquipCooldown = true
@@ -4664,15 +4675,6 @@ function Backpack:IsSlotEquipable(ToolOrSlot):boolean
 	if not Slot then return end
 
 	return not Slot.IsDisabled
-end
-
---[[
-	Sets the search placeholder text. (Only works before module has been started.)
-]]
-function Backpack:SetSearchPlaceholderText(Text: string)
-	if typeof(Text) ~= "string" then error("Argument 1 is not of type: string") end
-
-	PlaceholderText = Text
 end
 
 --[[
