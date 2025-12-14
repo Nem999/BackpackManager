@@ -11,16 +11,11 @@ local ToolTip = BackpackGui.ToolTip
 local InventoryUI = BackpackGui.InventoryMain
 local HintUI = BackpackGui.Hint
 
-local LocalPlayer: Player = PlayersService.LocalPlayer or PlayersService:GetPropertyChangedSignal("LocalPlayer"):Wait() or PlayersService.LocalPlayer
-
-
 local BackpackManager = require(script.Parent:WaitForChild("BackpackManager"))
 
 function LargeScreenDetected() -- Change or remove if you have tool slots with custom sizes in mind.
 	SlotTemplate.Button.ToolNum.Size = UDim2.fromOffset(24, 27)
 	BackpackButton.Size = UDim2.fromOffset(93, 78)
-	SlotTemplate.Size = UDim2.fromOffset(100, 100)
-	SelectionUi.Size = UDim2.fromOffset(140, 135)
 	ToolTip.Size = UDim2.fromOffset(130, 35)
 
 	SlotTemplate.Button.ToolName.TextSize = 24
@@ -32,7 +27,8 @@ function LargeScreenDetected() -- Change or remove if you have tool slots with c
 
 	HintUI.Size = UDim2.fromOffset(215,61)
 	HintUI.Background.HintText.TextSize = 37
-
+	
+	BackpackManager.Settings.IconScale = 1.8
 	BackpackManager.Settings.HotbarYOffset += 25
 	BackpackManager.Settings.InventoryYOffset += 135
 	BackpackManager.Settings.BackpackButtonXOffset += 60
@@ -46,20 +42,25 @@ function SmallScreenDetected()  -- Change or remove if you have the inventory wi
 	HintUI.Size = UDim2.fromOffset(104, 30)
 end
 
-function PreformTranslations()
-	local Translator: Translator
-	local Success, Fail = pcall(function()
-		Translator = LocalizationService:GetTranslatorForPlayerAsync(LocalPlayer)
-	end)
-	
-	if Success then
-		local Result = Translator:Translate(InventoryUI.TextBox, InventoryUI.TextBox.PlaceholderText)
-		
-		BackpackManager:SetSearchPlaceholderText(Result)
-	end
+function NoKeyboardDetected()
+	BackpackManager.Settings.ShowToolNumber = false
 end
 
-if GuiService.ViewportDisplaySize == Enum.DisplaySize.Large then 
+function disableOrganizingOnMobileDevices()
+	
+	BackpackManager.Settings.CanOrganize = false
+	
+	BackpackManager.InventoryOpened:Connect(function()
+		BackpackManager.Settings.CanOrganize = true
+	end)
+
+	BackpackManager.InventoryClosed:Connect(function()
+		BackpackManager.Settings.CanOrganize = false
+	end)
+
+end
+
+if GuiService:IsTenFootInterface() then 
 	LargeScreenDetected()
 end
 
@@ -67,8 +68,14 @@ if GuiService.ViewportDisplaySize == Enum.DisplaySize.Small then
 	SmallScreenDetected()
 end
 
--- //
+if not UserInputService.KeyboardEnabled then
+	NoKeyboardDetected()
+end
 
-PreformTranslations()
+if UserInputService.TouchEnabled then
+	disableOrganizingOnMobileDevices() -- You may need to remove this if you want to change the "CanOrganize" setting.
+end
+
+-- //
 
 BackpackManager.StartBackpack() -- :D
