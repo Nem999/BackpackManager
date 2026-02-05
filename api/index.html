@@ -1,0 +1,1890 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="../configurations/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>API - BackpackManager</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="Deep-Purple" data-md-color-accent="Deep-Purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="BackpackManager" class="md-header__button md-logo" aria-label="BackpackManager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BackpackManager
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Nem999/BackpackManager" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BackpackManager
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="BackpackManager" class="md-nav__button md-logo" aria-label="BackpackManager" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    BackpackManager
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Nem999/BackpackManager" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    BackpackManager
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Events
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tooladded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .ToolAdded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toolremoving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .ToolRemoving
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onslotrefresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .OnSlotRefresh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#onslotremoving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .OnSlotRemoving
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dragstarted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .DragStarted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dragended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .DragEnded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hoverstarted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .HoverStarted
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hoverended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .HoverEnded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inventoryopened" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .InventoryOpened
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inventoryclosed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .InventoryClosed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cooldownended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .CooldownEnded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toolequipped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .ToolEquipped
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toolunequipped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .ToolUnequipped
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#startbackpack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .StartBackpack()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapkeybind" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :MapKeybind()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unmapkeybind" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :UnmapKeybind()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :Equip()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isinventoryopen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :IsInventoryOpen()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isenabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :IsEnabled()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isinventoryenabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :IsInventoryEnabled()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openinventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :OpenInventory()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#closeinventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :CloseInventory()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#movetooltohotbarslotnumber" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :MoveToolToHotbarSlotNumber()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#movetooltoinventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :MoveToolToInventory()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#movetooltohotbar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :MoveToolToHotbar()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swaptools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :SwapTools()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sorttools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :SortTools()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#popnotificationicon" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :PopNotificationIcon()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unequiptools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :UnequipTools()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getequippedtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetEquippedTools()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gettools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetTools()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gettoolfromframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetToolFromFrame()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gettoolfromslot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetToolFromSlot()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gettoolfromnumber" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetToolFromNumber()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getmaxhotbartools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetMaxHotbarTools()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getslotfromtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetSlotFromTool()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getslotfromframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetSlotFromFrame()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getslotfromnumber" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetSlotFromNumber()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gethotbartools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetHotbarTools()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getinventorytools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetInventoryTools()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gethighlights" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetHighlights()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setviewportenabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :SetViewportEnabled()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setviewportoffset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :SetViewportOffset()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gluetool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GlueTool()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removeglue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :RemoveGlue()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#istoolglued" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :IsToolGlued()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disableinventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :DisableInventory()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enableinventory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :EnableInventory()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#locktool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :LockTool()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unlocktool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :UnlockTool()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#istoollocked" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :IsToolLocked()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :Disable()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :Enable()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getbackpack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetBackpack()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setcooldown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :SetCooldown()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isoncooldown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :IsOnCooldown()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getslotnumber" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetSlotNumber()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getframefromtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetFrameFromTool()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getframefromhotbarnumber" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :GetFrameFromHotbarNumber()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isrunning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :IsRunning()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setslotequipable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :SetSlotEquipable()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isslotequipable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        :IsSlotEquipable()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configurations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="api">API</h1>
+<h2 id="events">Events</h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When using events that interact with tool slots such as <code>.OnSlotRefresh</code> or <code>.ToolAdded</code> be sure to connect your function before calling <code>.StartBackpack()</code> or this event will not fire for tools that were already in your backpack when BackpackManager started.</p>
+</div>
+<h3 id="tooladded">.ToolAdded</h3>
+<p>Fires when a tool is added.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">ToolAdded</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlotFrame</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="o">..</span><span class="s2">&quot; was added living in&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="toolremoving">.ToolRemoving</h3>
+<p>Fires right before a tool gets removed.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">ToolRemoving</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlotFrame</span><span class="p">,</span><span class="w"> </span><span class="nv">GhostSlot</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="o">..</span><span class="s2">&quot; is removing living in&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="onslotrefresh">.OnSlotRefresh</h3>
+<p>Fires when a tool slot is refreshed.</p>
+<p>Unlike ToolRemoving this event can fire whenever a tool has been swapped or moved.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">OnSlotRefresh</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlotFrame</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">TextLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Instance</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">&quot;TextLabel&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nv">TextLabel</span><span class="p">.</span><span class="py">BackgroundTransparency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nv">TextLabel</span><span class="p">.</span><span class="py">Size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">UDim2</span><span class="p">.</span><span class="nf">fromOffset</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">TextLabel</span><span class="p">.</span><span class="py">TextScaled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="nv">TextLabel</span><span class="p">.</span><span class="py">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Hi&quot;</span>
+<span class="w">    </span><span class="nv">TextLabel</span><span class="p">.</span><span class="py">TextColor3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">Color3</span><span class="p">.</span><span class="nf">fromRGB</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span><span class="w"> </span><span class="mi">255</span><span class="p">)</span>
+<span class="w">    </span><span class="nv">TextLabel</span><span class="p">.</span><span class="py">Name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;MyTextLabel&quot;</span>
+
+<span class="w">    </span><span class="nv">TextLabel</span><span class="p">.</span><span class="py">Parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">ToolSlot</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="onslotremoving">.OnSlotRemoving</h3>
+<p>Fires when a tool slot is being removed.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">OnSlotRefresh</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlotFrame</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">TextLabel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="p">:</span><span class="nf">FindFirstChild</span><span class="p">(</span><span class="s2">&quot;MyTextLabel&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">TextLabel</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nv">TextLabel</span><span class="p">:</span><span class="nf">Destroy</span><span class="p">()</span><span class="w"> </span><span class="kr">end</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="dragstarted">.DragStarted</h3>
+<p>Fires when a tool slot is starts being dragged.</p>
+<div class="admonition notice">
+<p class="admonition-title">Notice</p>
+<p>Tool and GhostSlot can be nil if the tool is being dragged on controller.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">DragStarted</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlotFrame</span><span class="p">,</span><span class="w"> </span><span class="nv">GhostSlot</span><span class="p">,</span><span class="w"> </span><span class="nv">isControllerDragging</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">isControllerDragging</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="o">..</span><span class="s2">&quot; is being dragged in toolslot&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="p">,</span><span class="w"> </span><span class="nv">GhostSlot</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">else</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The tool is being dragged on a controller or UI navigation mode.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="dragended">.DragEnded</h3>
+<p>Fires when a tool slot stops being dragged.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">DragEnded</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="p">,</span><span class="w"> </span><span class="nv">GhostSlot</span><span class="p">,</span><span class="w"> </span><span class="nv">isControllerDragging</span><span class="p">,</span><span class="w"> </span><span class="nv">Position</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">isControllerDragging</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="o">..</span><span class="s2">&quot; is being no longer being dragged in toolslot&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="p">,</span><span class="w"> </span><span class="nv">GhostSlot</span><span class="p">)</span>
+
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The drag stopped at position&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">Position</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">else</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The tool was being dragged on a controller or UI navigation mode.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="hoverstarted">.HoverStarted</h3>
+<p>Fires when a tool slot is being hovered over.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">HoverStarted</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">ToolSlot</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetToolFromSlot</span><span class="p">(</span><span class="nv">ToolSlot</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;is being hovered over.&quot;</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="hoverended">.HoverEnded</h3>
+<p>Fires when a tool slot stops being hovered over.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">HoverEnded</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">ToolSlot</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetToolFromSlot</span><span class="p">(</span><span class="nv">ToolSlot</span><span class="p">)</span>
+
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;is no longer being hovered over.&quot;</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="inventoryopened">.InventoryOpened</h3>
+<p>Fires when the inventory is opened.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">InventoryOpened</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The inventory was opened.&quot;</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="inventoryclosed">.InventoryClosed</h3>
+<p>Fires when the inventory is closed.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">InventoryClosed</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The inventory was closed.&quot;</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="cooldownended">.CooldownEnded</h3>
+<p>Fires when a tool's cooldown ends.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">CooldownEnded</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="o">..</span><span class="s2">&quot;&#39;s cooldown has ended&quot;</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="toolequipped">.ToolEquipped</h3>
+<p>Fires when a tool gets equipped.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">ToolEquipped</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlotFrame</span><span class="p">,</span><span class="w"> </span><span class="nv">Highlight</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="o">..</span><span class="s2">&quot; was equipped and is using highlight:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nv">Highlight</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="toolunequipped">.ToolUnequipped</h3>
+<p>Fires when a tool gets equipped.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">ToolUnequipped</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="nv">ToolSlotFrame</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="o">..</span><span class="s2">&quot; was unequipped&quot;</span><span class="p">)</span>
+<span class="kr">end</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="functions">Functions</h2>
+<h3 id="startbackpack">.StartBackpack()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="nf">StartBackpack</span><span class="p">()</span>
+</code></pre></div>
+<p><em>Starts the backpack, builds the gui, disables Roblox's default backpack, and only runs once.</em></p>
+<div class="admonition failure">
+<p class="admonition-title">Failure</p>
+<p>Call this function in a script that will not be deleted. NEVER call this in a CharacterScript.</p>
+</div>
+<div class="admonition failure">
+<p class="admonition-title">Failure</p>
+<p>Calling any of the functions below except <code>:IsRunning()</code> without calling this function first will result in an error.</p>
+</div>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">require</span><span class="p">(</span><span class="nv">BackpackManager</span><span class="p">)</span>
+
+<span class="nv">BackpackManager</span><span class="p">.</span><span class="nf">StartBackpack</span><span class="p">()</span>
+
+<span class="c1">-- Starts the backpack.</span>
+</code></pre></div>
+<h3 id="mapkeybind">:MapKeybind()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">MapKeybind</span><span class="p">(</span><span class="nv">SlotNumber</span><span class="p">:</span><span class="w"> </span><span class="py">number</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nv">Keycode</span><span class="p">:</span><span class="w"> </span><span class="py">Enum</span><span class="p">.</span><span class="py">Keycode</span><span class="p">)</span>
+</code></pre></div>
+<p>Maps a slot's equip function to a certain keycode.</p>
+<div class="admonition failure">
+<p class="admonition-title">Failure</p>
+<p>This only works for hotbar slots and not inventory slots.</p>
+</div>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">MapKeybind</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nv">Enum</span><span class="p">.</span><span class="py">Keycode</span><span class="p">.</span><span class="py">P</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Maps the 2nd tool slots equip to P</span>
+</code></pre></div>
+<h3 id="unmapkeybind">:UnmapKeybind()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">UnmapKeybind</span><span class="p">(</span><span class="nv">SlotNumber</span><span class="p">:</span><span class="w"> </span><span class="py">number</span><span class="p">)</span>
+</code></pre></div>
+<p>Unmap a slot's equip function.</p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">UnmapKeybind</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Unmaps the 2nd tool slots equip function</span>
+</code></pre></div>
+<h3 id="equip">:Equip()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">Equip</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">),</span><span class="w"> </span><span class="nv">Generic</span><span class="p">:</span><span class="w"> </span><span class="py">boolean</span><span class="p">,</span><span class="w"> </span><span class="nv">RespectsCooldown</span><span class="p">:</span><span class="w"> </span><span class="py">boolean</span><span class="p">)</span>
+
+<span class="c1">-- ToolOrSlot: The Tool being equipped</span>
+<span class="c1">-- Generic: Whether BackpackManager should traverse all of the tools or only the tools in the hotbar.</span>
+<span class="c1">-- RespectsCooldown: If BackpackManager should take the cooldown into account when equipping the tool.</span>
+</code></pre></div>
+<p>Equips a tool if it's not currently equipped and unequips it if it is.</p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">Equip</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span>
+<span class="c1">-- Equips the 2nd tool only searching in the hotbar slots and ignoring any equip cooldown.</span>
+</code></pre></div>
+<h3 id="isinventoryopen">:IsInventoryOpen()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsInventoryOpen</span><span class="p">():</span><span class="nv">boolean</span>
+</code></pre></div>
+<p>Returns true if the inventory is currently open and false if it's not.</p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsInventoryOpen</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The inventory is open.&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+<h3 id="isenabled">:IsEnabled()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsEnabled</span><span class="p">():</span><span class="nv">boolean</span>
+</code></pre></div>
+<p>Returns true if the backpack is currently enabled and false if it's not currently enabled.</p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsEnabled</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BackpackManager is currently enabled.&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+<h3 id="isinventoryenabled">:IsInventoryEnabled()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsInventoryEnabled</span><span class="p">():</span><span class="nv">boolean</span>
+</code></pre></div>
+<p>Returns true if the inventory is currently enabled and false if it's not currently enabled.</p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsInventoryEnabled</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The inventory is currently enabled.&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+</code></pre></div>
+<h3 id="openinventory">:OpenInventory()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">OpenInventory</span><span class="p">(</span><span class="nv">RespectsCooldown</span><span class="p">:</span><span class="w"> </span><span class="py">boolean</span><span class="p">)</span>
+<span class="c1">-- RespectsCooldown: If BackpackManager should take the cooldown into account when opening the inventory.</span>
+</code></pre></div>
+<p>Opens the inventory.</p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">OpenInventory</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="c1">-- Open the inventory and ignore any cooldown</span>
+</code></pre></div>
+<h3 id="closeinventory">:CloseInventory()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">CloseInventory</span><span class="p">(</span><span class="nv">RespectsCooldown</span><span class="p">:</span><span class="w"> </span><span class="py">boolean</span><span class="p">)</span>
+<span class="c1">-- RespectsCooldown: If BackpackManager should take the cooldown into account when closing the inventory.</span>
+</code></pre></div>
+<p>Closes the inventory.</p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">CloseInventory</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="c1">-- Close the inventory and ignore any cooldown</span>
+</code></pre></div>
+<h3 id="movetooltohotbarslotnumber">:MoveToolToHotbarSlotNumber()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">MoveToolToHotbarSlotNumber</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">),</span><span class="w"> </span><span class="nv">SlotNumber</span><span class="p">:</span><span class="w"> </span><span class="py">number</span><span class="p">):</span><span class="nv">table</span>
+
+<span class="c1">-- ToolOrSlot: The Tool being moved</span>
+<span class="c1">-- SlotNumber: The number the tool is being moved into.</span>
+</code></pre></div>
+<p>Moves a tool to a certain hotbar slot number.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Trying to move a tool into a slot that is occupied will result in a warning. Consider using <code>:SwapTools()</code> in that case.</p>
+</div>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">MoveToolToHotbarSlotNumber</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="c1">-- Moves a tool into slot 3</span>
+</code></pre></div>
+<h3 id="movetooltoinventory">:MoveToolToInventory()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">MoveToolToInventory</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">)):</span><span class="nv">table</span>
+
+<span class="c1">-- ToolOrSlot: The tool being moved</span>
+</code></pre></div>
+<p>Moves a tool to the inventory.</p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">MoveToolToInventory</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">-- Moves whatever tool is in slot 2 to the inventory.</span>
+</code></pre></div>
+<h3 id="movetooltohotbar">:MoveToolToHotbar()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">MoveToolToHotbar</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">)):</span><span class="nv">table</span>
+
+<span class="c1">-- ToolOrSlot: The tool being moved</span>
+</code></pre></div>
+<p>Moves a tool to a free hotbar slot if one exist.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Trying to use this function while the hotbar is full will result in a warning. Use <code>:GetMaxHotbarTools()</code> and <code>:GetHotbarTools()</code> to check if the hotbar is full beforehand.</p>
+</div>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">MoveToolToHotbar</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="c1">-- Moves whatever tool is in slot 13 to the hotbar.</span>
+</code></pre></div>
+<h3 id="swaptools">:SwapTools()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SwapTools</span><span class="p">(</span><span class="nv">ToolOrSlot1</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">),</span><span class="w"> </span><span class="nv">ToolOrSlot2</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">)):(</span><span class="nv">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">table</span><span class="p">)</span>
+
+<span class="c1">-- ToolOrSlot: The tool being moved</span>
+</code></pre></div>
+<p>Swaps two tools.</p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SwapTools</span><span class="p">(</span><span class="nv">Tool1</span><span class="p">,</span><span class="w"> </span><span class="nv">Tool2</span><span class="p">)</span>
+<span class="c1">-- Swaps Tool1 and Tool2 with each other.</span>
+</code></pre></div>
+<h3 id="sorttools">:SortTools()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SortTools</span><span class="p">()</span>
+</code></pre></div>
+<p><em>Sorts the tools in the hotbar filling any missing gap.</em></p>
+<div class="admonition notice">
+<p class="admonition-title">Notice</p>
+<p>If a tool has been moved using <code>:MoveToolToHotbarSlotNumber()</code> then this function will ignore sorting that tool.</p>
+</div>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetToolFromNumber</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetToolFromNumber</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetToolFromNumber</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SortTools</span><span class="p">()</span>
+<span class="kr">end</span>
+</code></pre></div>
+<h3 id="popnotificationicon">:PopNotificationIcon()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">PopNotificationIcon</span><span class="p">(</span><span class="nv">State</span><span class="p">:</span><span class="w"> </span><span class="py">boolean</span><span class="p">)</span>
+
+<span class="c1">-- State: the visibility state of the notification icon.</span>
+</code></pre></div>
+<p><em>Shows the notification icon on the backpack icon.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">PopNotificationIcon</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+<span class="c1">-- Displays the notification icon</span>
+
+<span class="nv">task</span><span class="p">.</span><span class="nf">wait</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">PopNotificationIcon</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+<span class="c1">-- Removes the notification icon</span>
+</code></pre></div>
+<h3 id="unequiptools">:UnequipTools()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">UnequipTools</span><span class="p">()</span>
+</code></pre></div>
+<p><em>Unequips non glued tools.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">task</span><span class="p">.</span><span class="nf">wait</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">UnequipTools</span><span class="p">()</span>
+
+<span class="c1">-- Unequips any tool that isn&#39;t glued.</span>
+</code></pre></div>
+<h3 id="getequippedtools">:GetEquippedTools()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetEquippedTools</span><span class="p">():</span><span class="nv">table</span>
+</code></pre></div>
+<p><em>Returns a table of all tools that are currently equipped.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetEquippedTools</span><span class="p">())</span>
+<span class="c1">-- Prints a table of all the tools that are equipped.</span>
+</code></pre></div>
+<h3 id="gettools">:GetTools()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetTools</span><span class="p">():</span><span class="nv">table</span>
+</code></pre></div>
+<p><em>Returns a table of all tools that are currently in the backpack and on the current character.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetTools</span><span class="p">())</span>
+<span class="c1">-- Prints a table of all the tools.</span>
+</code></pre></div>
+<h3 id="gettoolfromframe">:GetToolFromFrame()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetToolFromFrame</span><span class="p">(</span><span class="nv">Frame</span><span class="p">:</span><span class="w"> </span><span class="py">Frame</span><span class="p">):</span><span class="nv">Tool</span>
+
+<span class="c1">-- Frame: The ToolSlot&#39;s Frame</span>
+</code></pre></div>
+<p><em>Returns the tool that corresponds to the given backpack slot.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetToolFromFrame</span><span class="p">(</span><span class="nv">Frame</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="c1">-- Prints a tool</span>
+</code></pre></div>
+<h3 id="gettoolfromslot">:GetToolFromSlot()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetToolFromSlot</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">)):</span><span class="nv">Tool</span>
+
+<span class="c1">-- ToolOrSlot: The tool being moved</span>
+</code></pre></div>
+<p><em>Returns the tool that corresponds to the given tool slot.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetToolFromSlot</span><span class="p">(</span><span class="nv">ToolSlot</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="c1">-- Prints a tool</span>
+</code></pre></div>
+<h3 id="gettoolfromnumber">:GetToolFromNumber()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetToolFromNumber</span><span class="p">(</span><span class="nv">Number</span><span class="p">:</span><span class="w"> </span><span class="py">number</span><span class="p">):</span><span class="nv">Tool</span>
+
+<span class="c1">-- Number: The tool slot&#39;s number</span>
+</code></pre></div>
+<p><em>Returns the tool that corresponds to the given slot number.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetToolFromNumber</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="c1">-- Prints the tool that lives in slot 3 if any</span>
+</code></pre></div>
+<h3 id="getmaxhotbartools">:GetMaxHotbarTools()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetMaxHotbarTools</span><span class="p">():</span><span class="nv">number</span>
+</code></pre></div>
+<p><em>Returns the max amount of slots that can fit in the hotbar at the moment.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">MaxToolSlots</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetMaxHotbarTools</span><span class="p">()</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">HotbarTools</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetHotbarTools</span><span class="p">()</span>
+
+<span class="kr">if</span><span class="w"> </span><span class="nv">MaxToolSlots</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="o">#</span><span class="nv">HotbarTools</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">MoveToolToHotbar</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Checks if the max hotbar slots have been reached before moving a tool into the hotbar</span>
+</code></pre></div>
+<h3 id="getslotfromtool">:GetSlotFromTool()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetSlotFromTool</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">)):</span><span class="nv">table</span>
+
+<span class="c1">-- ToolOrSlot: The tool being used to get the slot from.</span>
+</code></pre></div>
+<p><em>Returns the slot data for a certain tool.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">SlotData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetSlotFromTool</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="kr">if</span><span class="w"> </span><span class="nv">SlotData</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">SlotData</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Prints the slot data in slot 2</span>
+</code></pre></div>
+<h3 id="getslotfromframe">:GetSlotFromFrame()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetSlotFromFrame</span><span class="p">(</span><span class="nv">Frame</span><span class="p">:</span><span class="w"> </span><span class="py">Frame</span><span class="p">):</span><span class="nv">table</span>
+
+<span class="c1">-- Frame: The tool slot&#39;s frame instance</span>
+</code></pre></div>
+<p><em>Returns the slot data for a certain frame.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">SlotData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetSlotFromFrame</span><span class="p">(</span><span class="nv">Frame</span><span class="p">)</span>
+
+<span class="kr">if</span><span class="w"> </span><span class="nv">SlotData</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">SlotData</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Prints the slot data that coressponds to said frame.</span>
+</code></pre></div>
+<h3 id="getslotfromnumber">:GetSlotFromNumber()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetSlotFromNumber</span><span class="p">(</span><span class="nv">Number</span><span class="p">:</span><span class="w"> </span><span class="py">number</span><span class="p">):</span><span class="nv">table</span>
+
+<span class="c1">-- Number: The tool slot&#39;s number</span>
+</code></pre></div>
+<p><em>Returns the slot data for a certain tool slots number.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">SlotData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetSlotFromNumber</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+
+<span class="kr">if</span><span class="w"> </span><span class="nv">SlotData</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">SlotData</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Prints the slot data that coressponds to slot 13</span>
+</code></pre></div>
+<h3 id="gethotbartools">:GetHotbarTools()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetHotbarTools</span><span class="p">():</span><span class="nv">table</span>
+</code></pre></div>
+<p><em>Returns a table of all tools that are currently in the hotbar.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">HotbarTools</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetHotbarTools</span><span class="p">()</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">Tool</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">HotbarTools</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Prints each name for each tool that is in the hotbar.</span>
+</code></pre></div>
+<h3 id="getinventorytools">:GetInventoryTools()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetInventoryTools</span><span class="p">():</span><span class="nv">table</span>
+</code></pre></div>
+<p><em>Returns a table of all tools that are currently in the inventory.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">InventoryTools</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetInventoryTools</span><span class="p">()</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">Tool</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">InventoryTools</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Prints each name for each tool that is in the inventory.</span>
+</code></pre></div>
+<h3 id="gethighlights">:GetHighlights()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetHighlights</span><span class="p">():</span><span class="nv">table</span>
+</code></pre></div>
+<p><em>Returns a table of all highlights.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Highlights</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetHighlights</span><span class="p">()</span>
+
+<span class="kr">for</span><span class="w"> </span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="nv">Highlight</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nb">pairs</span><span class="p">(</span><span class="nv">Highlights</span><span class="p">)</span><span class="w"> </span><span class="kr">do</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="nv">Highlight</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Prints each highlight</span>
+</code></pre></div>
+<h3 id="setviewportenabled">:SetViewportEnabled()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SetViewportEnabled</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">),</span><span class="w"> </span><span class="nv">boolean</span><span class="p">:</span><span class="w"> </span><span class="py">boolean</span><span class="p">)</span>
+
+<span class="c1">-- ToolOrSlot: The tool being used.</span>
+<span class="c1">-- boolean: The state the viewport is being set to</span>
+</code></pre></div>
+<p><em>Enables or disables the viewport frame displaying the physical tool.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">ToolAdded</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Sword&quot;</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SetViewportEnabled</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span><span class="p">)</span>
+
+<span class="c1">-- Enables viewport mode if a tool with the name of &quot;Sword&quot; gets added</span>
+</code></pre></div>
+<h3 id="setviewportoffset">:SetViewportOffset()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SetViewportOffset</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">),</span><span class="w"> </span><span class="nv">OffsetCFrame</span><span class="p">:</span><span class="w"> </span><span class="py">CFrame</span><span class="p">)</span>
+
+<span class="c1">-- ToolOrSlot: The tool being used.</span>
+<span class="c1">-- OffsetCFrame: The offset CFrame the viewport&#39;s camera uses.</span>
+</code></pre></div>
+<p><em>Sets the camera offset for the viewport frame displaying the physical tool.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">ToolAdded</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Sword&quot;</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SetViewportOffset</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="nv">CFrame</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">CFrame</span><span class="p">.</span><span class="nf">Angles</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">math.rad</span><span class="p">(</span><span class="mi">60</span><span class="p">))</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span><span class="p">)</span>
+
+<span class="c1">-- Sets the viewport offset if a tool with the name of &quot;Sword&quot; gets added</span>
+</code></pre></div>
+<h3 id="gluetool">:GlueTool()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GlueTool</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">))</span>
+
+<span class="c1">-- ToolOrSlot: The tool being glued.</span>
+</code></pre></div>
+<p><em>Forces a tool to be equipped at all times and prevents said tool from being moved (This will not use a hotbar slot).</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">ToolAdded</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Sword&quot;</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GlueTool</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span><span class="p">)</span>
+
+<span class="c1">-- Glues the tool if a tool with the name of &quot;Sword&quot; gets added</span>
+</code></pre></div>
+<h3 id="removeglue">:RemoveGlue()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">RemoveGlue</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">))</span>
+
+<span class="c1">-- ToolOrSlot: The glued tool to remove from.</span>
+</code></pre></div>
+<p><em>Removes a glued tool, returning it back to normal.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span>
+
+<span class="kr">if</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsToolGlued</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">RemoveGlue</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Unglues a tool if the tool is glued.</span>
+</code></pre></div>
+<h3 id="istoolglued">:IsToolGlued()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsToolGlued</span><span class="p">(</span><span class="nv">Tool</span><span class="p">:</span><span class="w"> </span><span class="py">Tool</span><span class="p">):</span><span class="nv">boolean</span>
+
+<span class="c1">-- ToolOrSlot: The tool being used.</span>
+</code></pre></div>
+<p><em>Returns the true if the tool is glued and false if it is not glued.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span>
+
+<span class="kr">if</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsToolGlued</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This tool is glued&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Checks if a tool is glued.</span>
+</code></pre></div>
+<h3 id="disableinventory">:DisableInventory()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">DisableInventory</span><span class="p">()</span>
+</code></pre></div>
+<p><em>Disables the inventory, prevents it from being used, and closes it if it's currently open.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsInventoryEnabled</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">DisableInventory</span><span class="p">()</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Disables the inventory if it is enabled.</span>
+</code></pre></div>
+<h3 id="enableinventory">:EnableInventory()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">EnableInventory</span><span class="p">()</span>
+</code></pre></div>
+<p><em>Enables the inventory.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsInventoryEnabled</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">EnableInventory</span><span class="p">()</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Enables the inventory if it is disabled.</span>
+</code></pre></div>
+<h3 id="locktool">:LockTool()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">LockTool</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">))</span>
+
+<span class="c1">-- ToolOrSlot: The tool being locked.</span>
+</code></pre></div>
+<p><em>Prevents a tool from being equipped and displays a lock icon on the slot.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">.</span><span class="py">ToolAdded</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">Tool</span><span class="p">.</span><span class="py">Name</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Sword&quot;</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">        </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">LockTool</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="w">    </span><span class="kr">end</span>
+<span class="kr">end</span><span class="p">)</span>
+
+<span class="c1">-- Locks the tool if a tool with the name of &quot;Sword&quot; gets added</span>
+</code></pre></div>
+<h3 id="unlocktool">:UnlockTool()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">UnlockTool</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">))</span>
+
+<span class="c1">-- ToolOrSlot: The tool being unlocked.</span>
+</code></pre></div>
+<p><em>Unlocks a tool letting it be equipped again.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span>
+
+<span class="kr">if</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsToolLocked</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">UnlockTool</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Unlocks a tool if the tool is locked.</span>
+</code></pre></div>
+<h3 id="istoollocked">:IsToolLocked()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsToolLocked</span><span class="p">(</span><span class="nv">Tool</span><span class="p">:</span><span class="w"> </span><span class="py">Tool</span><span class="p">):</span><span class="nv">boolean</span>
+
+<span class="c1">-- Tool: The tool to be checked.</span>
+</code></pre></div>
+<p><em>Returns the true if the tool is locked and false if it is not locked.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span>
+
+<span class="kr">if</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsToolLocked</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This tool is locked&quot;</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Checks if a tool is locked.</span>
+</code></pre></div>
+<h3 id="disable">:Disable()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">Disable</span><span class="p">()</span>
+</code></pre></div>
+<p><em>Stops rendering the backpack and prevents it from responding to user input.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">game</span><span class="p">:</span><span class="nf">IsLoaded</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">Disable</span><span class="p">()</span><span class="w"> </span><span class="kr">end</span>
+
+<span class="c1">-- Disables BackpackManager if the game is not loaded.</span>
+</code></pre></div>
+<h3 id="enable">:Enable()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">Enable</span><span class="p">()</span>
+</code></pre></div>
+<p><em>Starts rendering the backpack, and makes the backpack respond to user input again.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">game</span><span class="p">:</span><span class="nf">IsLoaded</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">Disable</span><span class="p">()</span><span class="w"> </span><span class="nv">game</span><span class="p">.</span><span class="py">Loaded</span><span class="p">:</span><span class="nf">Wait</span><span class="p">()</span><span class="w"> </span><span class="kr">end</span>
+
+<span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">Enable</span><span class="p">()</span>
+
+<span class="c1">-- Disables BackpackManager if the game is not loaded then enables it once the game has been loaded.</span>
+</code></pre></div>
+<h3 id="getbackpack">:GetBackpack()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetBackpack</span><span class="p">():</span><span class="nv">Backpack</span>
+</code></pre></div>
+<p><em>Returns the current backpack instance being used by the BackpackManager.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Backpack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetBackpack</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nv">Backpack</span><span class="p">)</span>
+
+<span class="c1">-- Prints the backpack being used.</span>
+</code></pre></div>
+<h3 id="setcooldown">:SetCooldown()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SetCooldown</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">))</span>
+
+<span class="c1">-- ToolOrSlot: The tool being used.</span>
+</code></pre></div>
+<p><em>Puts the tool on cooldown which displays on the tool slot.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span>
+
+<span class="nv">Tool</span><span class="p">.</span><span class="py">Activated</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">()</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsOnCooldown</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kr">return</span><span class="w"> </span><span class="kr">end</span>
+
+<span class="w">  </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SetCooldown</span><span class="p">(</span><span class="nv">Tool</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1">-- Your code </span>
+<span class="kr">end</span><span class="p">)</span>
+
+<span class="c1">-- Checks if there is a cooldown on the tool before calling any other code and sets the cooldown to 2 seconds.</span>
+</code></pre></div>
+<h3 id="isoncooldown">:IsOnCooldown()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsOnCooldown</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">)):</span><span class="nv">boolean</span>
+
+<span class="c1">-- ToolOrSlot: The tool being checked.</span>
+</code></pre></div>
+<p><em>Returns true if the tool has a cooldown active and false if the tool does not have a cooldown active.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span>
+
+<span class="nv">Tool</span><span class="p">.</span><span class="py">Activated</span><span class="p">:</span><span class="nf">Connect</span><span class="p">(</span><span class="kr">function</span><span class="p">()</span>
+<span class="w">  </span><span class="kr">if</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsOnCooldown</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kr">return</span><span class="w"> </span><span class="kr">end</span>
+
+<span class="w">  </span><span class="c1">-- Your code </span>
+<span class="kr">end</span><span class="p">)</span>
+
+<span class="c1">-- Checks if there is a cooldown on the tool before calling any other code.</span>
+</code></pre></div>
+<h3 id="getslotnumber">:GetSlotNumber()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetSlotNumber</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">)):</span><span class="nv">number</span>
+
+<span class="c1">-- ToolOrSlot: The tool being used.</span>
+</code></pre></div>
+<p><em>Returns the slot number that corresponds to a tool or slot.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">SlotNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetSlotNumber</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nv">SlotNumber</span><span class="p">)</span>
+
+<span class="c1">-- Prints the slot number of the target tool</span>
+</code></pre></div>
+<h3 id="getframefromtool">:GetFrameFromTool()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetFrameFromTool</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">)):</span><span class="nv">Frame</span>
+
+<span class="c1">-- ToolOrSlot: The tool being used.</span>
+</code></pre></div>
+<p><em>Returns the backpack slot from the tool given.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Tool</span>
+<span class="kd">local</span><span class="w"> </span><span class="nv">Frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetFrameFromTool</span><span class="p">(</span><span class="nv">Tool</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nv">Frame</span><span class="p">)</span>
+
+<span class="c1">-- Prints the frame of the target tool</span>
+</code></pre></div>
+<h3 id="getframefromhotbarnumber">:GetFrameFromHotbarNumber()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetFrameFromHotbarNumber</span><span class="p">(</span><span class="nv">Number</span><span class="p">:</span><span class="w"> </span><span class="py">number</span><span class="p">):</span><span class="nv">Frame</span>
+
+<span class="c1">-- Number: The hotbar slot number to get the frame from</span>
+</code></pre></div>
+<p><em>Returns the backpack slot from the tool given.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">local</span><span class="w"> </span><span class="nv">Frame</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">GetFrameFromHotbarNumber</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nv">Frame</span><span class="p">)</span>
+
+<span class="c1">-- Prints the frame of the target hotbar number</span>
+</code></pre></div>
+<h3 id="isrunning">:IsRunning()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsRunning</span><span class="p">():</span><span class="nv">boolean</span>
+</code></pre></div>
+<p><em>Returns true if the backpack is running and false if it's not.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsRunning</span><span class="p">()</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kr">repeat</span><span class="w"> </span><span class="nv">task</span><span class="p">.</span><span class="nf">wait</span><span class="p">()</span><span class="w"> </span><span class="kr">until</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsRunning</span><span class="p">()</span>
+
+<span class="c1">-- Yield your code until BackpackManager is running. Useful if you have multiple different scripts interacting with BackpackManager.</span>
+</code></pre></div>
+<h3 id="setslotequipable">:SetSlotEquipable()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SetSlotEquipable</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">),</span><span class="w"> </span><span class="nv">boolean</span><span class="p">)</span>
+
+<span class="c1">-- ToolOrSlot: The tool being used.</span>
+</code></pre></div>
+<p><em>Toggles if a tool slot can have its tool equipped or not.</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SetSlotEquipable</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+
+<span class="nv">task</span><span class="p">.</span><span class="nf">wait</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SetSlotEquipable</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+
+<span class="c1">-- Slot 5 will not be able to have any tools equipped for 2 seconds.</span>
+</code></pre></div>
+<h3 id="isslotequipable">:IsSlotEquipable()</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsSlotEquipable</span><span class="p">(</span><span class="nv">ToolOrSlot</span><span class="p">:</span><span class="w"> </span><span class="err">(</span><span class="py">number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">ToolSlot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">Tool</span><span class="p">)):</span><span class="nv">boolean</span>
+
+<span class="c1">-- ToolOrSlot: The tool being checked.</span>
+</code></pre></div>
+<p><em>Returns true if the tool slot is equippable. And false if its not (does not count for locking).</em></p>
+<p>Example usage:</p>
+<div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">IsSlotEquipable</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="kr">then</span>
+<span class="w">    </span><span class="nv">BackpackManager</span><span class="p">:</span><span class="nf">SetSlotEquipable</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<span class="kr">end</span>
+
+<span class="c1">-- Checks if slot 5 can have its tool equipped and if not then enable slot 5 to have its tool equipped.</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
