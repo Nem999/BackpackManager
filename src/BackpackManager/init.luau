@@ -1263,7 +1263,10 @@ function newSlot(Tool: Tool, BPSlot, SlotNum)
 		end
 	end
 
-	ToolSlot.Dragger:Enable()
+	if Slot.Dragger then
+		Slot.Dragger:Enable()
+	end
+	
 
 	local Frame = ToolSlot.Frame.Button
 	ToolSlot.Frame.Tool.Value = Tool
