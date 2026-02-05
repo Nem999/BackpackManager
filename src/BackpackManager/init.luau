@@ -553,11 +553,11 @@ function DisplayHints(shouldNotSetHints)
 
 			if wasFromController then
 				if Button.Name:match("Button") or Button.Name:match("DPad") then
-					return HINT_BUTTON_ICONS[Button]
+					return HINT_BUTTON_ICONS[Button] or ""
 				end
 			elseif wasFromKeyboardOrMouse then
 				if not Button.Name:match("Button") and not Button.Name:match("DPad") then
-					return HINT_BUTTON_ICONS[Button]
+					return HINT_BUTTON_ICONS[Button] or ""
 				end
 			end
 
@@ -1263,7 +1263,9 @@ function newSlot(Tool: Tool, BPSlot, SlotNum)
 		end
 	end
 
-	ToolSlot.Dragger:Enable()
+	if ToolSlot and ToolSlot.Dragger then
+		ToolSlot.Dragger:Enable()
+	end
 
 	local Frame = ToolSlot.Frame.Button
 	ToolSlot.Frame.Tool.Value = Tool
@@ -1544,7 +1546,7 @@ function MoveEquipBar(FrameSlot, DisabledFrame, time)
 						Highlight.Highlight.Position = UDim2.fromOffset(FrameSlot.Frame.AbsolutePosition.X + GuiService:GetGuiInset().X, FrameSlot.Frame.AbsolutePosition.Y + GuiService:GetGuiInset().Y)
 					end
 				end
-				
+
 				spawn(function()
 					while FrameSlot.Moving do
 						move()
@@ -1607,12 +1609,12 @@ function BuildGui()
 	ToolTipFrame.Visible = false
 	InventoryFrame.Visible = false
 	HintFrame.Visible = false
-	
+
 	local Scale = Backpack.Settings.IconScale
-	
+
 	BackpackSlotFrame.Size = UDim2.fromOffset(BackpackSlotFrame.AbsoluteSize.X * Scale, BackpackSlotFrame.AbsoluteSize.Y * Scale)
 	SelectionUIFrame.Size = UDim2.fromOffset(SelectionUIFrame.AbsoluteSize.X * Scale, SelectionUIFrame.AbsoluteSize.Y * Scale)
-	
+
 	BackpackSlotFrame.Button.ToolNum.Visible = Backpack.Settings.ShowToolNumber
 
 	BackgroundTransparency = BPButton.ImageButton.BackgroundColor3
@@ -2310,7 +2312,9 @@ function refreshSlot(Slot, PrevSlot, ignoreSlotPosition)
 	nameUpdate(Slot)
 	onParentUpdate(Slot.Tool, Slot.Tool.Parent)
 
-	Slot.Dragger:Enable()
+	if Slot and Slot.Dragger then
+		Slot.Dragger:Enable()
+	end
 
 	Backpack.OnSlotRefresh:Fire(Slot.Tool, Slot.Frame)
 end
@@ -2683,7 +2687,7 @@ function revealSlots(State)
 				local using = use or i
 
 				Slot.Frame.Button.ToolNum.Text = using
-				
+
 				if Backpack.Settings.ShowToolNumber then
 					Slot.Frame.Button.ToolNum.Visible = true
 				end
@@ -2741,7 +2745,7 @@ function revealSlots(State)
 				local using = use or i
 
 				Slot.Frame.Button.ToolNum.Text = using
-				
+
 				if Backpack.Settings.ShowToolNumber then
 					Slot.Frame.Button.ToolNum.Visible = true
 				end
@@ -4985,8 +4989,10 @@ function Backpack.StartBackpack()
 						Parent = UISelectedSlots[1].Frame.Button,
 					})
 
-					UISelectedSlots[1].Dragger:Disable(true)
-					UISelectedSlots[1].Dragger:Enable()
+					if UISelectedSlots[1] and UISelectedSlots[1].Dragger then
+						UISelectedSlots[1].Dragger:Disable(true)
+						UISelectedSlots[1].Dragger:Enable()
+					end
 
 					Backpack.DragStarted:Fire(UISelectedSlots[1].Frame.Tool.Value, UISelectedSlots[1].Frame, nil, true)
 				end
