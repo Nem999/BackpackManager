@@ -747,14 +747,6 @@ function onParentUpdate(Tool, Parent, ForceRemove)
 		if ToolSlot.PlacementSlot then
 			Animate(GhostSlot, "Position", UDim2.fromOffset(GhostSlot.AbsolutePosition.X, GhostSlot.AbsolutePosition.Y + 200), .7, 2)
 
-			spawn(function()
-				while ToolSlot.IsAnimating do wait() end
-
-				if not InventoryIsOpen and not Backpack.Settings.ShowInactiveHotbarSlots then
-					Frame.Parent.Visible = false
-				end
-			end)
-
 			if Backpack.Settings.Animate == true then
 				Spring.completed(GhostSlot, function()
 					GhostSlot:Destroy()
@@ -3853,7 +3845,6 @@ function Backpack:SwapTools(Tool1, Tool2):(table | table)
 					GhostSlot2.Visible = false
 					return
 				end
-
 
 				Slot1.Frame.Button.Visible = true
 				Slot2.Frame.Button.Visible = true 
