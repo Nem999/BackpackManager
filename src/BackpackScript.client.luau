@@ -13,6 +13,13 @@ local HintUI = BackpackGui.Hint
 
 local BackpackManager = require(script.Parent:WaitForChild("BackpackManager"))
 
+local InventoryOpenedSignal = nil
+local InventoryClosedSignal = nil
+
+local KeyboardEnabled = false
+local TouchEnabled = false
+local MouseEnabled = false
+
 function LargeScreenDetected() -- Change or remove if you have tool slots with custom sizes in mind.
 	SlotTemplate.Button.ToolNum.Size = UDim2.fromOffset(24, 27)
 	BackpackButton.Size = UDim2.fromOffset(93, 78)
@@ -47,17 +54,39 @@ function NoKeyboardDetected()
 end
 
 function disableOrganizingOnMobileDevices()
-	
 	BackpackManager.Settings.CanOrganize = false
 	
-	BackpackManager.InventoryOpened:Connect(function()
+	InventoryOpenedSignal = BackpackManager.InventoryOpened:Connect(function()
 		BackpackManager.Settings.CanOrganize = true
 	end)
 
-	BackpackManager.InventoryClosed:Connect(function()
+	InventoryClosedSignal = BackpackManager.InventoryClosed:Connect(function()
 		BackpackManager.Settings.CanOrganize = false
 	end)
 
+end
+
+local function isKeyboardEnabled()
+	KeyboardEnabled = UserInputService.KeyboardEnabled
+	
+	if not UserInputService.KeyboardEnabled then
+		NoKeyboardDetected()
+	else
+		BackpackManager.Settings.ShowToolNumber = true
+	end
+end
+
+local function isMobileScreen()  -- You may need to change this if you want to change the "CanOrganize" setting.
+	TouchEnabled = UserInputService.TouchEnabled
+	MouseEnabled = UserInputService.MouseEnabled
+	
+	if UserInputService.TouchEnabled and not UserInputService.MouseEnabled then
+		disableOrganizingOnMobileDevices()
+	else
+		BackpackManager.Settings.CanOrganize = true
+		if InventoryClosedSignal then InventoryClosedSignal:Disconnect() end
+		if InventoryOpenedSignal then InventoryOpenedSignal:Disconnect() end
+	end
 end
 
 if GuiService:IsTenFootInterface() then 
@@ -68,13 +97,24 @@ if GuiService.ViewportDisplaySize == Enum.DisplaySize.Small then
 	SmallScreenDetected()
 end
 
-if not UserInputService.KeyboardEnabled then
-	NoKeyboardDetected()
+isKeyboardEnabled()
+isMobileScreen() 
+
+local function KeyboardChanged()
+	if UserInputService.KeyboardEnabled == KeyboardEnabled then return end
+	isKeyboardEnabled()
+	BackpackManager:ResetGui()
 end
 
-if UserInputService.TouchEnabled then
-	disableOrganizingOnMobileDevices() -- You may need to remove this if you want to change the "CanOrganize" setting.
+local function TouchScreenChanged()
+	if UserInputService.TouchEnabled == TouchEnabled and UserInputService.MouseEnabled == MouseEnabled then return end
+	isMobileScreen()
+	BackpackManager:ResetGui()
 end
+
+UserInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(KeyboardChanged)
+UserInputService:GetPropertyChangedSignal("TouchEnabled"):Connect(TouchScreenChanged)
+UserInputService:GetPropertyChangedSignal("MouseEnabled"):Connect(TouchScreenChanged)
 
 -- //
 
