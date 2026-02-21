@@ -2113,6 +2113,12 @@ function refreshSlot(Slot, PrevSlot, ignoreSlotPosition)
 		end
 
 		Slot.PlacementSlot.Visible = true
+		
+		if Backpack.Settings.ShowToolNumber then
+			Slot.Frame.Button.ToolNum.Visible = true
+		else
+			Slot.Frame.Button.ToolNum.Visible = false
+		end
 
 		defer(function()
 			if not Slot.Loaded then
@@ -4673,6 +4679,13 @@ function Backpack:IsSlotEquipable(ToolOrSlot):boolean
 end
 
 --[[
+	Resets and refreshes the entire Gui.
+]]
+function Backpack:ResetGui():boolean
+	if BackpackInstance then SetBackpack(BackpackInstance) end
+end
+
+--[[
 	Starts the backpack, builds the gui, disables Roblox's default backpack, and only runs once.
 ]]
 function Backpack.StartBackpack()
@@ -4687,7 +4700,7 @@ function Backpack.StartBackpack()
 		if not Frame.Tool.Value then return end 
 		if Frame.Tool.Value.ToolTip == "" then return end
 
-		if UserInputService.TouchEnabled then
+		if UserInputService.TouchEnabled and not UserInputService.MouseEnabled then
 			if not InventoryIsOpen then return end
 		end
 
