@@ -171,10 +171,6 @@ local function validateSettings()
 		if Settings.MaxHotbarToolSlots < Settings.MinHotbarSlots then
 			insertError("Max hotbar slots cannot be less than minimum.")
 		end
-
-		if Settings.MaxHotbarToolSlots > 10 then
-			insertError("Max hotbar slots cannot be more than 10")
-		end
 	end
 	
 	if typeof(Settings.IconScale) == "number" then
