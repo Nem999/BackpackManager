@@ -26,7 +26,7 @@ Settings.ShowBackpackIcon = true -- Will show backpack icon if enabled and will 
 Settings.ShowInactiveHotbarSlots = false -- Empty hotbar slots will show if set to true and will not show if set to false.
 Settings.ShowToolNumber = true -- If true then tool numbers will show for hotbar slots.
 Settings.ToolEquippingDisabled = false -- If true then tools will not be able to be equipped. This also means that functions like BackpackManager:Equip(Tool) will not work, only manually parenting tools to your character will work.
-
+Settings.HotbarAlignment = "Center" -- Alignment of the hotbar on screen. Accepts "Left", "Center", or "Right".
 
 Settings.BackpackButtonOpenedColor = Color3.fromRGB(141, 164, 238) -- Color of the backpack button when the inventory is opened
 
@@ -43,7 +43,7 @@ Settings.BackpackButtonYOffset = 10 -- Y Offset for backpack button.
 Settings.SlotAnimateStartYOffset = 100 -- Y offset start for slot animation.
 Settings.SlotAnimateStartXOffset = 0 -- X offset start for slot animation.
 Settings.ToolTipYOffset = -40 -- Y Offset for tool tips.
-
+Settings.HotbarEdgeOffset = 10 -- Pixel padding from the screen edge when HotbarAlignment is "Left" or "Right". Ignored for "Center".
 
 
 Settings.INVENTORY_OPENANDCLOSE_KEYCODES = { -- Which keycodes will open and close the inventory
@@ -122,7 +122,9 @@ local function validateSettings()
 	checkType("SlotAnimateStartXOffset", "number")
 	checkType("ToolTipSpeed", "number")
 	checkType("ToolTipYOffset", "number")
-
+	checkType("HotbarAlignment", "string")
+	checkType("HotbarEdgeOffset", "number")
+	
 	checkType("PreventEquippingOnToolCooldown", "boolean")
 	checkType("AutoCalculateMaxToolSlots", "boolean")
 	checkType("ShowInactiveHotbarSlots", "boolean")
@@ -176,6 +178,12 @@ local function validateSettings()
 	if typeof(Settings.IconScale) == "number" then
 		if Settings.IconScale < 0 then
 			insertError("Icon scale cannot be less than 0")
+		end
+	end
+	
+	if typeof(Settings.HotbarAlignment) == "string" then
+		if Settings.HotbarAlignment ~= "Left" and Settings.HotbarAlignment ~= "Center" and Settings.HotbarAlignment ~= "Right" then
+			insertError('HotbarAlignment must be "Left", "Center", or "Right"')
 		end
 	end
 
