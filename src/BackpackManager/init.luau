@@ -1689,7 +1689,11 @@ function BuildGui()
 			Connections = {},
 		})
 	end
-
+	
+	local HotbarAnchorX = Backpack.Settings.HotbarAlignment == "Left" and 0 or Backpack.Settings.HotbarAlignment == "Right" and 1 or 0.5
+	local HotbarPosX = Backpack.Settings.HotbarAlignment == "Left" and 0 or Backpack.Settings.HotbarAlignment == "Right" and 1 or 0.5
+	local HotbarEdgePx = Backpack.Settings.HotbarAlignment == "Left" and Backpack.Settings.HotbarEdgeOffset or Backpack.Settings.HotbarAlignment == "Right" and -Backpack.Settings.HotbarEdgeOffset or 0
+	
 	local MainFrame = create("Frame", {
 		Name = "BackpackMain",
 		Size = UDim2.fromScale(1,1),
@@ -1701,13 +1705,13 @@ function BuildGui()
 			create("Frame", {
 				Name = "HotbarContainer",
 				Size = UDim2.new(1, 0, 0, 60),
-				Position = UDim2.new(.5, 0, 1, -Backpack.Settings.HotbarYOffset),
+				Position = UDim2.new(HotbarPosX, HotbarEdgePx, 1, -Backpack.Settings.HotbarYOffset),
 				Visible = true,
-				AnchorPoint = Vector2.new(.5, .5),
+				AnchorPoint = Vector2.new(HotbarAnchorX, .5),
 				BackgroundTransparency = 1,
 				["Children"] = {
 					create("UIListLayout", {
-						HorizontalAlignment = Enum.HorizontalAlignment.Center,
+						HorizontalAlignment = HotbarPosX == 0 and Enum.HorizontalAlignment.Left or HotbarPosX == 1 and Enum.HorizontalAlignment.Right or Enum.HorizontalAlignment.Center,
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
 						FillDirection = Enum.FillDirection.Horizontal,
@@ -2012,24 +2016,26 @@ function CalculateInventoryButtonPosition()
 				continue
 			end
 		end
-
+		
 		if not (if slot.PlacementSlot.Visible then true else slot.Tool) then continue end
 		if not Max then Max = slot end
-
-
-		if slot.Position > Max.Position then
+		
+		-- For right alignment anchor to the leftmost slot so the button sits to the left of the hotbar and doesn't shift when empty slots are revealed on inventory open.
+		if (if Backpack.Settings.HotbarAlignment == "Right" then slot.Position < Max.Position else slot.Position > Max.Position) then
 			Max = slot
 		end
 	end
-
-	if not Max then 
-		BPButton.Position = UDim2.new(0.5, 0, 1, -(Backpack.Settings.HotbarYOffset))
+	
+	if not Max then
+		local X = Backpack.Settings.HotbarAlignment == "Left" and 0 or Backpack.Settings.HotbarAlignment == "Right" and 1 or 0.5
+		BPButton.Position = UDim2.new(X, 0, 1, -(Backpack.Settings.HotbarYOffset))
 		return
 	end
-
-	local MaxAbsolutePosition = Max.Frame.AbsolutePosition
-
-	BPButton.Position = UDim2.fromOffset(MaxAbsolutePosition.X + GuiService:GetGuiInset().X + Backpack.Settings.BackpackButtonXOffset, MaxAbsolutePosition.Y + GuiService:GetGuiInset().Y + Backpack.Settings.BackpackButtonYOffset)
+	local AnchorAbsolutePosition = Max.Frame.AbsolutePosition
+	local BackpackXOffset = Backpack.Settings.HotbarAlignment == "Right" and -(Backpack.Settings.BackpackButtonXOffset - BackpackSlotFrame.AbsoluteSize.X / 2) or Backpack.Settings.BackpackButtonXOffset
+	
+	-- Flip the X offset when right-aligned so the button sits to the left of the leftmost slot.
+	BPButton.Position = UDim2.fromOffset(AnchorAbsolutePosition.X + GuiService:GetGuiInset().X + BackpackXOffset, AnchorAbsolutePosition.Y + GuiService:GetGuiInset().Y + Backpack.Settings.BackpackButtonYOffset)
 end
 
 function CalculateGluedSlotPosition()
@@ -2045,13 +2051,15 @@ function CalculateGluedSlotPosition()
 	end
 
 	if not Min then
-		BackpackGui.BackpackMain.GlueContainer.Position = UDim2.new(0.28, 0, 1, -(Backpack.Settings.HotbarYOffset))
+		local X = Backpack.Settings.HotbarAlignment == "Left" and 0 or Backpack.Settings.HotbarAlignment == "Right" and 0.72 or 0.28
+		BackpackGui.BackpackMain.GlueContainer.Position = UDim2.new(X, 0, 1, -(Backpack.Settings.HotbarYOffset))
 		return
 	end
-
 	local MinAbsolutePosition = Min.PlacementSlot.AbsolutePosition
-
-	BackpackGui.BackpackMain.GlueContainer.Position = UDim2.new(0, MinAbsolutePosition.X - GuiService:GetGuiInset().X  - Backpack.Settings.GlueContainerXOffset, 1, -(Backpack.Settings.HotbarYOffset))
+	
+	-- Flip the X offset when right-aligned so glue slots sit to the right of the hotbar's leading edge rather than always to the left.
+	local GlueXOffset = Backpack.Settings.HotbarAlignment == "Right" and Backpack.Settings.GlueContainerXOffset or -Backpack.Settings.GlueContainerXOffset
+	BackpackGui.BackpackMain.GlueContainer.Position = UDim2.new(0, MinAbsolutePosition.X - GuiService:GetGuiInset().X + GlueXOffset, 1, -(Backpack.Settings.HotbarYOffset))
 end
 
 function setGroupTransparency(GuiObject: GuiObject, Transparency, fn, onSameInstance)
